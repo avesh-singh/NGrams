@@ -28,17 +28,15 @@ def get_bigrams():
 
 def get_trigrams():
     unigram = get_unigrams()
-    for i in range(len(unigram)):
+    i = 0
+    while i < len(unigram):
         if unigram[i] == '<s1>':
-            print(unigram[i:i+3])
             unigram[i:i + 1] = '<s1>','<s2>'
             i += 1
-            print(unigram[i:i + 3])
         elif unigram[i] == '</s1>':
-            print(unigram[i:i + 3])
             unigram[i:i + 1] = '</s2>', '</s1>'
             i += 1
-            print(unigram[i:i + 3])
+        i += 1
     trigram = []
     for i in range(2, len(unigram)):
         trigram.append('{} {} {}'.format(unigram[i - 2], unigram[i - 1], unigram[i]))
@@ -46,13 +44,15 @@ def get_trigrams():
 
 def get_quadgrams():
     unigram = get_unigrams()
-    for i in range(len(unigram)):
+    i = 0
+    while i < len(unigram):
         if unigram[i] == '<s1>':
             unigram[i:i + 1] = '<s1>','<s2>','<s3>'
             i += 2
         elif unigram[i] == '</s1>':
             unigram[i:i + 1] = '</s3>','</s2>', '</s1>'
             i += 2
+        i += 1
     quadgram = []
     for i in range(3, len(unigram)):
         quadgram.append('{} {} {} {}'.format(unigram[i - 3], unigram[i - 2], unigram[i - 1], unigram[i]))
@@ -61,13 +61,13 @@ def get_quadgrams():
 if __name__ == '__main__':
     if '1' in sys.argv:
         print('generating unigrams')
-        print(get_unigrams()[:40])
+        print(get_unigrams())
     if '2' in sys.argv:
         print('generating bigrams')
-        print(get_bigrams()[:40])
+        print(get_bigrams())
     if '3' in sys.argv:
         print('generating trigrams')
-        print(get_trigrams()[:40])
+        print(get_trigrams())
     if '4' in sys.argv:
         print('generating quadgrams')
-        print(get_quadgrams()[:40])
+        print(get_quadgrams())

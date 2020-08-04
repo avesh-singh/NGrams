@@ -14,18 +14,16 @@ def generate_sentence():
         pick = ceil(uniform(0, len(trigrams) - 1))
         first_trigram = trigrams[pick]
         first_word = first_trigram.split(' ')[0]
-    # print('[%d]'%counter)
     sentence.extend(first_trigram.split(' '))
     last_bigram = ' '.join(sentence[-2:])
     last_word = ''
-    while last_word != '</s1>':
+    while last_word != '</s1>' or last_word != '</s2>':
         counter += 1
         pick = ceil(uniform(0, len(trigrams) - 1))
         phrase = trigrams[pick]
         word_one,word_two,word_three = phrase.split(' ')
         if "{} {}".format(word_one,word_two) != last_bigram:
             continue
-        # print('[%d]'%counter)
         last_word = word_three
         last_bigram = ' '.join([word_two,word_three])
         sentence.append(word_three)

@@ -14,21 +14,17 @@ def generate_sentence():
         pick = ceil(uniform(0, len(quadgrams) - 1))
         first_quadgram = quadgrams[pick]
         first_word = first_quadgram.split(' ')[0]
-    print('[%d]'%counter)
+    # print('[%d]'%counter)
     sentence.extend(first_quadgram.split(' '))
-    print(sentence)
     last_trigram = ' '.join(sentence[1:])
     last_word = ''
-    while last_word != '</s1>':
+    while last_word != '</s1>' and last_word != '</s2>' and last_word != '</s3>':
         counter += 1
         pick = ceil(uniform(0, len(quadgrams) - 1))
         phrase = quadgrams[pick]
-        print(phrase)
         words = phrase.split(' ')
-        if ' '.join(words[1:]) != last_trigram:
+        if ' '.join(words[:-1]) != last_trigram:
             continue
-        # print('[%d]'%counter)
-        # print(sentence)
         last_word = words[-1]
         sentence.append(words[-1])
         words.pop(0)
