@@ -9,7 +9,7 @@ def generate_sentence():
     first_word = ''
     first_phrase = ''
     counter = 0
-    while first_word != '<s>' and first_word != '<p>':
+    while first_word != '<s1>':
         counter += 1
         pick = ceil(uniform(0, len(bigrams) - 1))
         first_phrase = bigrams[pick]
@@ -17,7 +17,7 @@ def generate_sentence():
     print('[%d]'%counter)
     sentence.extend(first_phrase.split(' '))
     last_word = sentence[-1]
-    while last_word != '</s>' and last_word != '</p>':
+    while last_word != '</s1>':
         counter += 1
         pick = ceil(uniform(0, len(bigrams) - 1))
         phrase = bigrams[pick]
@@ -36,8 +36,8 @@ def generate_sentence_naive_filtered():
     first_word = ''
     first_phrase = ''
     counter = 0
-    filtered_bigrams = [phrase for phrase in bigrams if phrase[:3] == '<s>']
-    while first_word != '<s>' and first_word != '<p>':
+    filtered_bigrams = [phrase for phrase in bigrams if phrase[:3] == '<s1>']
+    while first_word != '<s1>':
         counter += 1
         pick = ceil(uniform(0, len(filtered_bigrams) - 1))
         first_phrase = filtered_bigrams[pick]
@@ -46,7 +46,7 @@ def generate_sentence_naive_filtered():
     sentence.extend(first_phrase.split(' '))
     last_word = sentence[-1]
     filtered_bigrams = [phrase for phrase in bigrams if phrase.split(' ')[0] == last_word]
-    while last_word != '</s>' and last_word != '</p>':
+    while last_word != '</s1>':
         counter += 1
         pick = ceil(uniform(0, len(filtered_bigrams) - 1))
         phrase = filtered_bigrams[pick]
@@ -57,5 +57,5 @@ def generate_sentence_naive_filtered():
         last_word = word_two
         sentence.append(word_two)
         filtered_bigrams = [phrase for phrase in bigrams if phrase.split(' ')[0] == last_word]
-    return ' '.join(sentence)
+    return ' '.join(sentence),counter
 

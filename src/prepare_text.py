@@ -16,22 +16,22 @@ def prepare_text():
             print(filename)
             with open('{}/{}'.format(dir, filename), 'r') as f:
                 text = f.read()
-                concat_text += '<p> <s> '
+                concat_text += '<s1> '
                 text = re.sub(r'(.*:)\s\s', '', text)
-                text = re.sub('.\n\n', ' </s> </p>\n<p> <s>', text)
+                text = re.sub('.\n\n', ' </s1>\n<s1> ', text)
                 text = re.sub('\n', ' ', text)
                 text = re.sub(r'(St)\.\s(\w+)', r'\1-\2', text)
                 text = re.sub(r'(\d)\.(\d)', r'\1,\2', text)
                 text = re.sub('[!?]',r'.',text)
-                text = re.sub(r'(\s?)(?!St\.)\b(\w+)\.(\s?)', r'\1\2 </s>\3<s> ', text)
-                text = re.sub(r'<s>(?!.*</s>)', '', text)
+                text = re.sub(r'(\s?)(?!St\.)\b(\w+)\.(\s?)', r'\1\2 </s1>\3<s1> ', text)
+                text = re.sub(r'<s1>(?!.*</s1>)', '', text)
                 text = re.sub('(\d|\w),(?!\d)', r'\1', text)
                 text = re.sub('[;",]','',text)
                 text = re.sub('--', ' ', text)
-                # print(re.findall('\sFoxesetc\s?', text))
-                concat_text += text + ' </p>\n\n'
-    with open('../input/concat_.txt', 'w') as f:
+                concat_text += text + ' \n\n'
+    with open('../input/concat.txt', 'w') as f:
         f.write(concat_text.lower())
     return concat_text
 
 prepare_text()
+

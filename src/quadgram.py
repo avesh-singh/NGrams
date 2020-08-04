@@ -9,7 +9,7 @@ def generate_sentence():
     first_word = ''
     first_quadgram = ''
     counter = 0
-    while first_word != '<s>' and first_word != '<p>':
+    while first_word != '<s1>':
         counter += 1
         pick = ceil(uniform(0, len(quadgrams) - 1))
         first_quadgram = quadgrams[pick]
@@ -19,7 +19,7 @@ def generate_sentence():
     print(sentence)
     last_trigram = ' '.join(sentence[1:])
     last_word = ''
-    while last_word != '</s>' and last_word != '</p>':
+    while last_word != '</s1>':
         counter += 1
         pick = ceil(uniform(0, len(quadgrams) - 1))
         phrase = quadgrams[pick]

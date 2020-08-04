@@ -9,7 +9,7 @@ def generate_sentence():
     first_word = ''
     first_trigram = ''
     counter = 0
-    while first_word != '<s>' and first_word != '<p>':
+    while first_word != '<s1>':
         counter += 1
         pick = ceil(uniform(0, len(trigrams) - 1))
         first_trigram = trigrams[pick]
@@ -18,7 +18,7 @@ def generate_sentence():
     sentence.extend(first_trigram.split(' '))
     last_bigram = ' '.join(sentence[-2:])
     last_word = ''
-    while last_word != '</s>' and last_word != '</p>':
+    while last_word != '</s1>':
         counter += 1
         pick = ceil(uniform(0, len(trigrams) - 1))
         phrase = trigrams[pick]

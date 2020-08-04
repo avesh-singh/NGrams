@@ -7,15 +7,18 @@ def generate_sentence():
     unigrams = ngrams.get_unigrams()
     sentence = []
     first_word = ''
-    while first_word != '<s>' and first_word != '<p>':
+    counter = 0
+    while first_word != '<s1>':
+        counter += 1
         pick = ceil(uniform(0, len(unigrams) - 1))
         first_word = unigrams[pick]
     sentence.append(first_word)
     word = ''
-    while word != '</s>' and word != '</p>':
+    while word != '</s1>':
+        counter += 1
         pick = ceil(uniform(0, len(unigrams) - 1))
         word = unigrams[pick]
-        if word == '<s>' or word == '<p>':
+        if word == '<s1>':
             continue
         sentence.append(word)
-    return ' '.join(sentence)
+    return ' '.join(sentence), counter
