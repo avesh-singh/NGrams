@@ -8,7 +8,10 @@ def prepare_text():
     open('../input/concat.txt', 'w').close()
     for dir, subdir, files in os.walk('../input'):
         files.sort()
-        files.remove('concat.txt')
+        if 'concat.txt' in files:
+            files.remove('concat.txt')
+        if 'unigram.txt' in files:
+            files.remove('unigram.txt')
         for filename in files:
             print(filename)
             with open('{}/{}'.format(dir, filename), 'r') as f:
@@ -24,9 +27,10 @@ def prepare_text():
                 text = re.sub(r'<s>(?!.*</s>)', '', text)
                 text = re.sub('(\d|\w),(?!\d)', r'\1', text)
                 text = re.sub('[;",]','',text)
+                text = re.sub('--', ' ', text)
                 # print(re.findall('\sFoxesetc\s?', text))
                 concat_text += text + ' </p>\n\n'
-    with open('../input/concat.txt', 'w') as f:
+    with open('../input/concat_.txt', 'w') as f:
         f.write(concat_text.lower())
     return concat_text
 
