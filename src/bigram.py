@@ -14,7 +14,6 @@ def generate_sentence():
         pick = ceil(uniform(0, len(bigrams) - 1))
         first_phrase = bigrams[pick]
         first_word = first_phrase.split(' ')[0]
-    print('[%d]'%counter)
     sentence.extend(first_phrase.split(' '))
     last_word = sentence[-1]
     while last_word != '</s1>':
@@ -24,10 +23,9 @@ def generate_sentence():
         word_one,word_two = phrase.split(' ')
         if word_one != last_word:
             continue
-        print('[%d]'%counter)
         last_word = word_two
         sentence.append(word_two)
-    return ' '.join(sentence)
+    return ' '.join(sentence), counter
 
 # generating from filtered list
 def generate_sentence_naive_filtered():

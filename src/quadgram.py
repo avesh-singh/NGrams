@@ -14,7 +14,6 @@ def generate_sentence():
         pick = ceil(uniform(0, len(quadgrams) - 1))
         first_quadgram = quadgrams[pick]
         first_word = first_quadgram.split(' ')[0]
-    # print('[%d]'%counter)
     sentence.extend(first_quadgram.split(' '))
     last_trigram = ' '.join(sentence[1:])
     last_word = ''
